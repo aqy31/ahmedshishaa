@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <!-- Cairo Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قائمة الطعام</title>
+  <style>
+    body {
+      
+    
+  font-family: "Cairo", system-ui, -apple-system, Segoe UI, sans-serif;
+      margin: 0;
+      background: #000; /* خلفية سوداء */
+      color: #fff;
+      scroll-behavior: smooth; /* تمرير ناعم */
+    }
+    /* خلي الهيدر ثابت */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* خلي شريط التصنيفات ثابت وراه */
+.tabs {
+  position: sticky;
+  top: 60px; /* ارتفاع الهيدر (تقدر تزود/تنقص حسب حجم الهيدر) */
+  z-index: 999;
+}
+
+    html {
+      scroll-behavior: smooth; /* حركة انتقال ناعمة */
+    }
+    .category {
+  padding: 15px;
+  scroll-margin-top: 190px; /* مجموع ارتفاع الهيدر + التبويبات */
+}
+
+    
+
+    /* شريط علوي */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      background: #000; /* اسود */
+    }
+    .header img {
+      height: 40px;
+    }
+    .search-box input {
+      padding: 8px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      outline: none;
+      width: 180px;
+    }
+
+    /* شريط التصنيفات */
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      background: #000;
+      padding: 5px;
+      gap: 10px;
+    }
+    .tab {
+      flex: none;
+      text-align: center;
+      cursor: pointer;
+    }
+    .tab img {
+      width: 125px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid transparent;
+    }
+    .tab.active img {
+      border: 90px solid #c62828;
+    }
+
+    /* قسم الأطباق */
+    .category {
+      padding: 15px;
+    }
+    .category-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #444;
+      padding-bottom: 10px;
+    }
+    .dishes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+    .card {
+      background: #ff3232;
+      border-radius: 15px;
+      overflow: hidden;
+      text-align: center;
+      color: white;
+      height: 320px; /* توحيد الارتفاع */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+    }
+    .card .info {
+      border-top: 1px solid #fff;
+      padding: 2px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<script>
+  // يضيف كلاس 'in' للمجموعة لما تدخل المنظور
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in');
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.category').forEach(sec => io.observe(sec));
+</script>
+
+<body>
+
+  <!-- الشريط العلوي -->
+  <div class="header">
+    <div class="search-box">
+      <input type="text" id="search" placeholder="ابحث عن طبق...">
+    </div>
+    <img src="logo.png" alt="Logo"> <!-- ضع شعارك هنا -->
+  </div>
+
+  <!-- شريط التصنيفات -->
+  <div class="tabs">
+    <div class="tab"><a href="#narghile"><img src="narghile.png" alt="نراكيل"></a></div>
+    <div class="tab"><a href="#hot-drinks"><img src="hot-drinks.png" alt="مشروبات ساخنة"></a></div>
+    <div class="tab"><a href="#iced-coffee"><img src="iced-coffee.png" alt="قهوة مثلجة"></a></div>
+  </div>
+
+  <!-- كل المجموعات في نفس الصفحة -->
+  <div id="narghile" class="category">
+    <div class="category-title">نراكيل</div>
+    <div class="dishes">
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة تفاح">
+        <div class="info">تفاحتين - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">علك نعناع - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">ليمون نعناع  - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">عنب نعناع - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">شمام  - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">انكليزي - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">شيشة - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">مارسين  - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">حمضيات - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">ببسي - 7,000</div>
+      </div>
+      <div class="card">
+        <img src="narghile-grape.jpg" alt="نركيلة عنب">
+        <div class="info">مارينا - ,7000</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="hot-drinks" class="category">
+    <div class="category-title">مشروبات ساخنة</div>
+    <div class="dishes">
+      <div class="card">
+        <img src="tea.jpg" alt="شاي أسود">
+        <div class="info">شاي أسود - 2,000</div>
+      </div>
+      <div class="card">
+        <img src="turkish-coffee.jpg" alt="قهوة تركية">
+        <div class="info">قهوة تركية - 3,000</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="iced-coffee" class="category">
+    <div class="category-title">قهوة مثلجة</div>
+    <div class="dishes">
+      <div class="card">
+        <img src="iced-latte.jpg" alt="آيس لاتيه">
+        <div class="info">آيس لاتيه - 5,000</div>
+      </div>
+      <div class="card">
+        <img src="iced-cappuccino.jpg" alt="آيس كابتشينو">
+        <div class="info">آيس كابتشينو - 5,500</div>
+      </div>
+      <div class="card">
+        <img src="iced-cappuccino.jpg" alt="آيس كابتشينو">
+        <div class="info">آيس كابتشينو - 5,500</div>
+      </div>
+      <div class="card">
+        <img src="iced-cappuccino.jpg" alt="آيس كابتشينو">
+        <div class="info">آيس كابتشينو - 5,500</div>
+      </div>
+      <div class="card">
+        <img src="iced-cappuccino.jpg" alt="آيس كابتشينو">
+        <div class="info">آيس كابتشينو - 5,500</div>
+      </div>
+      <div class="card">
+        <img src="iced-cappuccino.jpg" alt="آيس كابتشينو">
+        <div class="info">آيس كابتشينو - 5,500</div>
+      </div>
+      <div class="card">
+        <img src="iced-cappuccino.jpg" alt="آيس كابتشينو">
+        <div class="info">آيس كابتشينو - 5,500</div>
+      </div>
+      <div class="card">
+        <img src="iced-cappuccino.jpg" alt="آيس كابتشينو">
+        <div class="info">آيس كابتشينو - 5,500</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // البحث
+    document.getElementById('search').addEventListener('input', function() {
+      let value = this.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        let text = card.innerText.toLowerCase();
+        card.style.display = text.includes(value) ? 'flex' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
